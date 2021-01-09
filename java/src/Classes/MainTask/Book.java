@@ -11,7 +11,7 @@ public class Book {
     private int id;
     private String title;
     private String[] authors;
-    private String publisher;
+    protected String publisher;
     private int publicationYear;
     private int amountOfPages;
     private double price;
