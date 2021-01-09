@@ -15,17 +15,60 @@ b) список книг, выпущенных заданным издатель
 c) список книг, выпущенных после заданного года.
  */
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class BookSolution {
     public static void main(String[] args) {
 
-        //List<Book> books = new ArrayList<>();
-        Book book = new Book("Будет кровь", new String[]{"Кинг С."}, "АСТ", 2021, 544, 726.00, true);
-        Book book1 = new Book("Изучаем Java", new String[] {"Сьерра К.", "Бейтс Б."}, "Эксмо", 2012, 720, 1284, true);
+        createListOfAllBooks();
 
         Book.getBooks().forEach(System.out::println);
+
+        booksWrittenBy("Кинг С.");
+
+        booksPublishedBy("Эксмо");
+
+        booksPublishedAfter(2012);
     }
 
+    public static void createListOfAllBooks() {
+        new Book("Будет кровь", new String[]{"Кинг С."}, "АСТ", 2021, 544, 726.00, true);
+        new Book("Изучаем Java", new String[]{"Сьерра К.", "Бейтс Б."}, "Эксмо", 2012, 720, 1284.12, true);
+        new Book("Оно", new String[]{"Кинг С."},"АСТ", 2020, 1184, 1073.00, true);
+        new Book("Гробница", new String[]{"Вилсон Ф"},"Эксмо", 2010, 432,247, false);
+
+        Book book1 = new Book("День праха", new String[]{"Гранже Ж.-К."}, "Азбука", 2020);
+        book1.setAmountOfPages(384);
+        book1.setPrice(511.55);
+        book1.setHardCover(true);
+    }
+
+    public static void booksWrittenBy(String author) {
+        System.out.println("\nКниги, которые написал " + author + " :\n");
+        for (Book element: Book.getBooks()) {
+            for (int i = 0; i < element.getAuthors().length; i++)
+            {
+                if(element.getAuthors()[i].equals(author)) {
+                    System.out.println(element);
+                }
+            }
+        }
+    }
+
+    public static void booksPublishedBy(String publisher) {
+        System.out.println("\nКниги выпущенные издательсвом " + publisher + " :\n");
+        for (Book element: Book.getBooks()) {
+            if(element.getPublisher().contains(publisher)) {
+                System.out.println(element);
+            }
+        }
+    }
+
+    public static void booksPublishedAfter(int year) {
+        System.out.println("\nКниги выпущенные после " + year + " года :\n");
+        for (Book element: Book.getBooks()) {
+            if(element.getPublicationYear() > (year)) {
+                System.out.println(element);
+            }
+        }
+    }
 }
